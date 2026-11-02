@@ -3,3 +3,18 @@
 ################################################################################
 
 /.svn
+/CashRegTest/bin/Release
+/CashRegTest/obj
+/Ecr.Manager/bin/Debug
+/Ecr.Manager/obj
+/ECR.Services/bin
+/ECR.Services/obj
+/Ecr.View/bin
+/Ecr.View/obj
+/ExcelManager/obj
+/TaxService.Converter/obj
+/CashRegTest/bin/Debug
+/.vs/ESS TaxServices/CopilotIndices/18.11.1013.49062
+/.vs/ESS TaxServices
+/CashReg/bin/Debug
+/CashReg/obj

@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6B428907-8051-4959-9EBF-12AD3FC10A9B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TaxService.Manager</RootNamespace>
+    <AssemblyName>TaxService.Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EsMarket.SharedData, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\ThirdParty\EsMarket.SharedData.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\Converters.cs" />
+    <Compile Include="Enums\ConvertToEnums.cs" />
+    <Compile Include="Helpers\AccountingDocumentConverter.cs" />
+    <Compile Include="Helpers\ExportHelper.cs" />
+    <Compile Include="Helpers\ExpressionSolver.cs" />
+    <Compile Include="Helpers\Helpers.cs" />
+    <Compile Include="Helpers\XmlHelper.cs" />
+    <Compile Include="Interfaces\IBankAccount.cs" />
+    <Compile Include="Interfaces\IBuyerInfo.cs" />
+    <Compile Include="Interfaces\IGood.cs" />
+    <Compile Include="Interfaces\IInvoiceNumber.cs" />
+    <Compile Include="Interfaces\ITaxpayer.cs" />
+    <Compile Include="Interfaces\ITotal.cs" />
+    <Compile Include="Models\AccountingDocumentModel.cs" />
+    <Compile Include="Models\BankAccount.cs" />
+    <Compile Include="Models\BuyerInfo.cs" />
+    <Compile Include="Models\ConverterViewModel.cs" />
+    <Compile Include="Models\GeneralInfo.cs" />
+    <Compile Include="Models\Good.cs" />
+    <Compile Include="Models\InventoryAccountingModel.cs" />
+    <Compile Include="Models\InvoiceNumber.cs" />
+    <Compile Include="Models\SupplierInfo.cs" />
+    <Compile Include="Models\Taxpayer.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ExcelManager\TaxServiceInvoices.csproj">
+      <Project>{4fe34b8d-6959-4fd1-95ee-1e7ddc6df110}</Project>
+      <Name>TaxServiceInvoices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

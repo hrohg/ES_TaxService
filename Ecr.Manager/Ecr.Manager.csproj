@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4BD35400-3EC7-4797-ACBF-0936752E4939}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ecr.Manager</RootNamespace>
+    <AssemblyName>Ecr.Manager</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\EcrTypesHelper.cs" />
+    <Compile Include="Helpers\MarkHelper.cs" />
+    <Compile Include="Helpers\RelayCommand.cs" />
+    <Compile Include="Interfaces\IEcrManager.cs" />
+    <Compile Include="Managers\EcrManager.cs" />
+    <Compile Include="Managers\SelectItemsManager.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\ReturnTicketViewModel.cs" />
+    <Compile Include="ViewModels\SelectItemsViewModel.cs" />
+    <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="Views\InputBox.xaml.cs">
+      <DependentUpon>InputBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PrepaymentWindow.xaml.cs">
+      <DependentUpon>PrepaymentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ReturnTicketWindow.xaml.cs">
+      <DependentUpon>ReturnTicketWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SelectItemsWindow.xaml.cs">
+      <DependentUpon>SelectItemsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm.Controls\InputForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm.Controls\InputForm.Designer.cs">
+      <DependentUpon>InputForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm.Controls\SelectDateIntermediateForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm.Controls\SelectDateIntermediateForm.Designer.cs">
+      <DependentUpon>SelectDateIntermediateForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="WinForm.Controls\SelectProductForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="WinForm.Controls\SelectProductForm.Designer.cs">
+      <DependentUpon>SelectProductForm.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Views\InputBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\PrepaymentWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\ReturnTicketWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\SelectItemsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CashReg\CashReg.csproj">
+      <Project>{2b6e2371-def7-4860-bc58-7d11aadfd810}</Project>
+      <Name>CashReg</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ExcelManager\TaxServiceInvoices.csproj">
+      <Project>{4fe34b8d-6959-4fd1-95ee-1e7ddc6df110}</Project>
+      <Name>TaxServiceInvoices</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="WinForm.Controls\InputForm.resx">
+      <DependentUpon>InputForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm.Controls\SelectDateIntermediateForm.resx">
+      <DependentUpon>SelectDateIntermediateForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="WinForm.Controls\SelectProductForm.resx">
+      <DependentUpon>SelectProductForm.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PaymentSystems\Fastshift.png" />
+    <Resource Include="Resources\Images\PaymentSystems\Idram.png" />
+    <Resource Include="Resources\Images\PaymentSystems\Mastercard.png" />
+    <Resource Include="Resources\Images\PaymentSystems\Mobidram.png" />
+    <Resource Include="Resources\Images\PaymentSystems\Telcell.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PaymentSystems\unknown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PaymentSystems\Teampay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\PaymentSystems\Inecopay.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

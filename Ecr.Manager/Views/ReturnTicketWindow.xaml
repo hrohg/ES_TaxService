@@ -1,0 +1,86 @@
+﻿<Window x:Class="Ecr.Manager.Views.ReturnTicketWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:dataType="clr-namespace:Ecr.Manager.ViewModels" 
+        xmlns:converter="clr-namespace:Ecr.Manager.Converters" 
+        d:DataContext="{d:DesignInstance Type=dataType:ReturnTicketViewModel}"
+        mc:Ignorable="d" Width="Auto" Height="Auto"  
+Title="Վերադարձի կտրոն" Topmost="True" SizeToContent="WidthAndHeight" ResizeMode="NoResize">
+    <Window.Resources>
+        <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"/>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" HorizontalAlignment="Left" Margin="3">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="150"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Կտրոնի համար:" HorizontalAlignment="Right" Margin="3"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding ReceiptId, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Margin="0 3"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="ՀԴՄ գրանցման համար:" HorizontalAlignment="Right" Margin="3"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding Crn, UpdateSourceTrigger=PropertyChanged}" HorizontalContentAlignment="Right" Margin="0 3"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Մասնակի վերադարձ:" HorizontalAlignment="Right" Margin="3"/>
+            <CheckBox Grid.Row="2" Grid.Column="1" IsChecked="{Binding IsReturnPartly}" IsEnabled="{Binding IsActive}" Margin="0 3"/>
+        </Grid>
+        <DataGrid Grid.Row="1" Grid.ColumnSpan="2" 
+                  ItemsSource="{Binding TicketProductDatas}" 
+                  Visibility="{Binding HasTicketData, Converter={StaticResource BoolToVisibilityConverter}}" 
+                  IsEnabled="{Binding IsReturnPartly}" 
+                  CanUserAddRows="False"
+                  AutoGenerateColumns="False"
+                  Margin="3 0">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Header="Վերադարձ">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate DataType="{x:Type dataType:TicketProductData}">
+                            <CheckBox IsChecked="{Binding IsReturn, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Կոդ" Binding="{Binding gc}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Անվանում" Binding="{Binding gn}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="ՉՄ" Binding="{Binding mu}" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Քանակ" Binding="{Binding qty}" IsReadOnly="False"/>
+                <DataGridTextColumn Header="Գին" Binding="{Binding p}" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="2" Visibility="{Binding HasTicketData, Converter={StaticResource BoolToVisibilityConverter}}" IsEnabled="{Binding IsReturnPartly}" Margin="3 0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto" MinWidth="100"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Առձեռն մուտքագրված գումար" HorizontalAlignment="Right" Margin="3"/>
+            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding TicketData.cash}" HorizontalContentAlignment="Right"/>
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Անկանխիկ մուծված գումար" HorizontalAlignment="Right" Margin="3"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TicketData.card}" HorizontalContentAlignment="Right"/>
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Օգտագործված կանխավճար" HorizontalAlignment="Right" Margin="3"/>
+            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding TicketData.ppu}" HorizontalContentAlignment="Right"/>
+        </Grid>
+        <Grid Grid.Row="3">
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="3">
+                <Button Content="Բեռնել" Margin="0 3" Command="{Binding GetTicketDataCommand}" Width="80"/>
+                <Button Content="Հաստատել" Margin="3" Command="{Binding ReturnTicketDataCommand}" Click="OkButton_Click" Width="80"/>
+                <Button Content="Չեղարկել" Margin="0 3" Command="{Binding CloseCommand}" Click="CancelButton_Click" Width="80"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</Window>
+
